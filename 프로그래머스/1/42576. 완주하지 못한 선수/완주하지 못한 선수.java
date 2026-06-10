@@ -1,26 +1,26 @@
 import java.util.*;
+
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        Map<String,Integer> map = new HashMap<>();
-        
-        for(String p:participant){
-            map.put(p,map.getOrDefault(p,0)+1);
-            
+        Map<String, Integer> map = new HashMap<>();
+
+        // 참가자 이름 카운팅
+        for (String name : participant) {
+            map.put(name, map.getOrDefault(name, 0) + 1);
         }
-        
-        for(String c:completion){
-            map.put(c, map.getOrDefault(c,0)-1);
+
+        // 완주자 이름 카운트 빼기
+        for (String name : completion) {
+            map.put(name, map.get(name) - 1);
         }
-        
-        for(String key:map.keySet()){
-           if(map.get(key)==1){
-               return key;
-           }
-            
+
+        // 카운트가 남아 있는 사람이 미완주자
+        for (String name : map.keySet()) {
+            if (map.get(name) > 0) {
+                return name;
+            }
         }
+
         return "";
-        
-       
-       
     }
 }
